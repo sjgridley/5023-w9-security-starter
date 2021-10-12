@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="py-2">All animals</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for animal in animals %}
+        <tr>
+            <td>
+                <a href="{{ url_for('animal.animal_details', id=animal.id) }}">
+                    {{ animal.name }}
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-danger" href="{{ url_for('animal.animal_delete', id=animal.id) }}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a class="btn btn-primary" href="{{ url_for('animal.animal_add') }}">Add animal</a>
+{% endblock %}
