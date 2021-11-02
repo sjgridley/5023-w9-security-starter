@@ -41,6 +41,11 @@
             </ul>
           {% endif %}
         {% endwith %}
+        {% if current_user.is_authenticated %}
+          <p>Logged in as: {{ current_user.username }}.</p>
+        {% else %}
+          <p>Not logged in.</p>
+        {% endif %}
         {% block content %}
         {% endblock %}
         </div>
