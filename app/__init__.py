@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import os
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
 # The secret key here is used for demonstration purposes - DO NOT USE IN PRODUCTION
-app.config['SECRET_KEY'] = 'this-is-a-secret' 
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 # Set up the login manager for the app
 login_manager = LoginManager()
@@ -50,7 +51,7 @@ def init_db():
         username = 'jill',
         is_admin = False
     )
-    jill.password = 'spaghetti22'
+    jill.password = os.environ.get('JILL_PASSWORD')
     desi = Pet(name='Desi', animal=dog)
     jill.pets.append(desi)
     db.session.add(jill)
@@ -60,7 +61,7 @@ def init_db():
         username = 'phil',
         is_admin = True
     )
-    phil.password = 'ravioli33'
+    phil.password = os.environ.get('PHIL_PASSWORD')
     ebony = Pet(name='Ebony', animal=cat)
     phil.pets.append(ebony)
     ivory = Pet(name='Ivory', animal=cat)

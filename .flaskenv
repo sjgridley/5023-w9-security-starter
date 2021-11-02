@@ -1,2 +1,5 @@
 FLASK_ENV=development
 FLASK_APP=register.py
+SECRET_KEY=GB2ckOyVJcCLfhwd4klLOg
+JILL_PASSWORD=spaghetti22
+PHIL_PASSWORD=ravioli33

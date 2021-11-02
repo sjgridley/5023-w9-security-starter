@@ -3,21 +3,25 @@ from flask import render_template, redirect, url_for
 from app import db
 from app.animal import bp
 from app.models import Animal
+from app.auth.decorators import admin_required
 from .forms import AddAnimalForm, EditAnimalForm
 
 @bp.route('/')
+@admin_required
 def animal_list():
     ''' A route for a list of all animals in the register. '''
     animals = Animal.query.all()
     return render_template('animal_list.html', title = 'Animals', animals = animals)
 
 @bp.route('/<int:id>')
+@admin_required
 def animal_details(id):
     ''' A route that shows the details for a specific animal in the collection. '''
     animal = Animal.query.get_or_404(id)
     return render_template('animal_details.html', title = 'Animal details', animal = animal)
 
 @bp.route('/add', methods = ['GET', 'POST'])
+@admin_required
 def animal_add():
     ''' A route for showing a form and processing form for adding a new animal. '''
     form = AddAnimalForm()
@@ -35,6 +39,7 @@ def animal_add():
     return render_template('animal_add.html', form = form, title = 'Add animal')
 
 @bp.route('/<int:id>/edit', methods = ['GET', 'POST'])
+@admin_required
 def animal_edit(id):
     ''' A route for showing a form and processing form when editing an animal. '''
     animal = Animal.query.get_or_404(id)

@@ -10,7 +10,7 @@ def admin_required(f):
             return redirect(url_for('auth.login'))
 
         if current_user.is_admin == False:
-            flash('That is an admin-only view! Not for you!')
+            flash('That is an admin-only view! No soup for you!')
             return redirect(url_for('index'))
 
         return f(*args, **kwargs)
